@@ -33,6 +33,9 @@ $(function() {
 	// update the GUI with the starting state (disconnected)
 	updateGUI();
 	
+	// Event raised when data has been read from the connection.
+	chrome.serial.onReceive.addListener(onReceive);
+	
 	// bind a click event on the "connect" button
 	$("#connect_button").bind("click", function(event, ui) {
 		
@@ -100,7 +103,6 @@ function onConnect(connectionInfo) {
 		connectionId = connectionInfo.connectionId;
 		connected = true;
 		updateGUI();
-		chrome.serial.onReceive.addListener(onReceive);
 		
 	// if not, show the error message
 	} else {
